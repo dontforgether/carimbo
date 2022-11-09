@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+    <head>
+
+        <link rel="shortcut icon" href="C:\StampFast-main\ico\favicon"> <!-- Favicon da página. -->
+
+        <title>StampFast!</title> <!-- Título da guia de página. -->
+
+        <meta charset="utf-8">
+
+        <link rel="stylesheet" href="utils/jquery-ui-1.12.1/jquery-ui.min.css">
+        <link rel="stylesheet" href="utils/jquery-ui-1.12.1/jquery-ui.theme.min.css">
+        <link rel="stylesheet" href="css/style.css"> 
+
+    </head> 
+
+    <body>
+        
+        <header>
+            
+            <nave class="menu"> 
+                <ul>
+                    <li><a href="https://google.com.br" target="_blank" rel="noopener noreferrer">Concessionárias</a></li>
+                    <li><a href="https://t.me/Hubblybot" target="_blank" rel="noopener noreferrer">Hubbly</a></li>
+                    <li><a href="https://t.me/HubblyTXbot" target="_blank" rel="noopener noreferrer">HubblyTX</a></li>
+                    <li><a href="http://coran.icomon.com.vc/versao/V3/index.html" target="_blank" rel="noopener noreferrer">CORAN</a></li>   
+                </ul>   
+            </nave>
+
+        </header>
+
+        <main>  
+
+            <div id="stampUser">
+                <label for="colaborador">Colaborador:</label>
+                <input type="text" name="colaborador" id="colaborador" value=""> <!-- Informe o nome do usuário. -->
+                <button id="addColaborador" disabled>+</button>
+            </div>
+
+            <br>
+
+            <div id="extraStamps">
+                <div>
+                    <p><b>— P1 —</b></p>
+                    <div>
+                        
+                        <button style="border-radius: 6px;" id="btnRetencao">Retenção</button>
+                        <button style="border-radius: 6px;" id="btnMonitoracao">Monitoração</button>
+                        <button style="border-radius: 6px;" id="btnSuporteTX">Suporte TX</button>
+                        <button style="border-radius: 6px;" id="btnAnaliseTX">Análise TX</button>
+                        <button style="border-radius: 6px;" id="btnSuporteRF">Suporte RF</button>
+                        <button style="border-radius: 6px;" id="btnPendencia">Pendência</button>
+                        <button style="border-radius: 6px;" id="p1Solicitacao" class="btnAnalise">Massiva</button>
+                        <button style="border-radius: 6px;" id="p1TX" class="btnAnalise">TX <span>(R/SDH)</span></button>
+                        <button style="border-radius: 6px;" id="btnClear">ClearTX</button>
+                    
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+            <br>
+
+            <div id="stampTypeSelect">  
+
+                <div>
+                    <p><b>— N2 —</b></p>
+                    <div>                       
+                        <button style="border-radius: 6px;" id="p1Ericsson" class="btnAnalise">Ericsson</button>
+                        <button style="border-radius: 6px;" id="p1Huawei" class="btnAnalise">Huawei</button>
+                        <button style="border-radius: 6px;" id="btnRetencaoP2">Retenção <span>(N2)</span></button>
+                        <button style="border-radius: 6px;" id="p1MetroQuedaP2P" class="btnAnalise">Metro <span>(Interface)</span></button>
+                        <button style="border-radius: 6px;" id="p1MetroQuedaInfo1S" class="btnAnalise">Metro <span>(Isolado)</span></button>
+                        <button style="border-radius: 6px;" id="p1MetroTemperatura" class="btnAnalise">Metro <span>(Temperatura)</span></button>
+                        <button style="border-radius: 6px;" id="btnSuporteTXN2">Triagem <span>(NOC)</span></button>
+                        <button style="border-radius: 6px;" id="btnPendenciaP2">Triagem <span>(Análise)</span></button>
+                        <button style="border-radius: 6px;" id="p1SDH" class="btnAnalise">SDH <span>(Análise)</span></button>
+                        
+                        
+                    </div>
+                    <br>
+                </div>
+
+                <div id="fastAnalysisDiv">
+                    <p>Análise Rápida:</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Tecnologia</th>
+                                    <th>Status da ERB</th>
+                                    <th>Alarmes</th>
+                                </tr>
+                                <tr id="linhaAddERB">
+                                    <td>
+                                        <button id="btnAdicionaERB">+</button>
+                                        <select name="tecnologias">
+                                            <optgroup label="Ericsson">
+                                                <option value="GSM Ericsson">GSM Ericsson</option>
+                                                <option value="MBTS Ericsson">MBTS Ericsson</option>
+                                                <option value="WCDMA Ericsson">WCDMA Ericsson</option>
+                                                <option value="LTE Ericsson">LTE Ericsson</option>
+                                                <option value="NR Ericsson">NR Ericsson</option>
+                                            </optgroup>
+                                            <optgroup label="Huawei">
+                                                <option value="GSM Huawei">GSM Huawei</option>
+                                                <option value="MBTS Huawei">MBTS Huawei</option>
+                                                <option value="WCDMA Huawei">WCDMA Huawei</option>
+                                                <option value="LTE Huawei">LTE Huawei</option>
+                                                <option value="NR Huawei">NR Huawei</option>
+                                            </optgroup>
+                                        </select>
+                                    </td>
+                                    <td colspan="2">
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <br>
+
+            <div id="stampBuilder">
+                
+                <div id="stampSettings">
+                    <p>Configurações: </p>
+                    
+                    <div>
+                        <span>Rota:</span>
+                        <input type="radio" name="infoRota" id="nPrecisaRota" value="nPrecisa" >
+                        <label for="nPrecisaConc">Não</label>
+                        <input type="radio" name="infoRota" id="precisaRota" value="precisa" checked>
+                        <label for="precisaConc">Sim</label>
+                    </div>
+
+                   <div>
+                        <span>Concessionária:</span>
+                        <input type="radio" name="infoConc" id="nPrecisaRota" value="nPrecisa" checked>
+                        <label for="nPrecisaConc">Não</label>
+                        <input type="radio" name="infoConc" id="precisaRota" value="precisa">
+                        <label for="precisaConc">Sim</label>
+                    </div>
+                    
+                    <div id="infoConcTextDiv">
+                        <span>Tipo do acionamento</span>
+                        <select name="infoConcText" id="infoConcText">
+                            <option value="padrao">Padrão</option>
+                            <option value="altaDemanda">Alta Demanda</option>
+                            <option value="semUcMedidor">Sem UC/Medidor</option>
+                            <option value="outro">Outros</option>
+                        </select>
+                    </div>
+
+                   <div>
+                        <span>Fabricante:</span>
+                        <input type="radio" name="temHuawei" id="naoTemHuawei" value="naoTemHuawei" checked>  <!-- Botões do fabricante Huawei. -->
+                        <label for="naoTemHuawei">Huawei</label>
+
+                        <input type="radio" name="temHuawei" id="temHuawei" value="temHuawei">  <!-- Botões do fabricante Ericsson. -->
+                        <label for="temHuawei">Ericsson</label>  
+                    </div>
+
+                    <div>
+                        <span>Caixa Metro:</span>
+                        <input type="radio" name="temMetroLocal" id="naoMetroLocal" value="naoMetroLocal">
+                        <label for="naoMetroLocal">Remoto</label>
+                        <input type="radio" name="temMetroLocal" id="temMetroLocal" value="temMetroLocal" checked>
+                        <label for="temMetroLocal">Local</label>
+                    </div>
+
+                    <div>
+                        <span>TP em atividade:</span>
+                        <input type="radio" name="temTp" id="naoTemTP" value="naoTemTP" checked>
+                        <label for="naoTemTP">Não</label>
+                        <input type="radio" name="temTp" id="temTP" value="temTP">
+                        <label for="temTP">Sim</label>
+                    </div>
+
+                    <div>
+                        <span>Passagem</span>
+                        <input type="radio" name="ERBoperacional" id="ERBoperacional" value="ERBoperacional" checked>
+                        <label for="ERBoperacional">Operacional</label>
+                        <input type="radio" name="ERBoperacional" id="ERBindisponivel" value="ERBindisponivel">
+                        <label for="ERBindisponivel">Indisponível</label>
+                    </div>
+
+                    <div>
+                        <span>Site:</span>
+                        <input type="radio" name="tipoSite" id="tipoSiteCCC" value="CCC (x) CONCENTRADOR ( ) CRÍTICO ( ) PONTA ( )"> <!-- Retorna o tipo de site. -->
+                        <label for="tipoSiteCCC">CCC</label>
+                        <input type="radio" name="tipoSite" id="tipoSiteConcentrador" value="CCC ( ) CONCENTRADOR (x) CRÍTICO ( ) PONTA ( )">
+                        <label for="tipoSiteConcentrador">Concentrador</label>
+                        <input type="radio" name="tipoSite" id="tipoSiteCritico" value="CCC ( ) CONCENTRADOR ( ) CRÍTICO (x) PONTA ( )">
+                        <label for="tipoSiteCritico">Crítico</label>
+                        <input type="radio" name="tipoSite" id="tipoSitePonta" value="CCC ( ) CONCENTRADOR ( ) CRÍTICO ( ) PONTA (x)" checked>
+                        <label for="tipoSitePonta">Ponta</label>
+                    </div>
+
+                   
+                </div>
+
+                <br>
+
+                <div id="theStamp">
+                    <span>Carimbo:</span>
+                    <div id="trueStamp">
+                        <div class="textarea textarea-blocked" id="stampHead" > 
+                            <span class="innerTextarea" contenteditable="true"></span>
+                        </div>
+
+                        <div class="textarea textarea-blocked" id="stampAlarme">
+                            <span class="innerTextarea" contenteditable="true"></span> 
+                        </div>
+
+                        <div class="textarea texteare-blocked" id="stampFabricante">
+                            <span class="innerTextarea" contenteditable="true"></span> 
+                        </div>
+
+                        <div class="textarea textarea-blocked" id="stampTecnologias">
+                            <span class="innerTextarea" contenteditable="true"></span> 
+                        </div>
+
+                        <div class="textarea" id="stampMainContent">                    
+                            <span class="innerTextarea" contenteditable="true"></span>
+                        </div>
+
+                        <div class="textarea" id="stampFast">
+                            <div class="innerTextarea" id="noneGSMRow">GSM: Não possui.</div>
+                            <div class="innerTextarea" id="noneWCDMARow">WCDMA: Não possui.</div>
+                            <div class="innerTextarea" id="noneLTERow">LTE: Não possui.</div>
+                        </div>
+
+                        <div class="textarea" id="stampMetro">
+                            <span class="innerTextarea" contenteditable="true"></span>
+                        </div>
+
+                        <div class="textarea" id="stampHost">
+                            <span class="innerTextarea" contenteditable="true"></span> 
+                        </div>
+
+                        <div class="textarea" id="stampInfoRota">
+                            <span class="innerTextarea" contenteditable="true"></span>
+                        </div>
+
+                        <div class="textarea" id="stampInfoConc">
+                            <span class="innerTextarea" contenteditable="true"></span>
+                        </div>
+
+                        <div class="textarea texteare-blocked" id="stampAntecessor">
+                            <span class="innerTextarea" contenteditable="true"></span> 
+                        </div>
+
+                        <div class="textarea" id="stampInfoTP">
+                            <span class="innerTextarea" contenteditable="true"></span>
+                        </div>
+
+                        <div class="textarea textarea-blocked" id="stampTipoSite">
+                            <span class="innerTextarea"></span>
+                        </div>
+
+                        <div class="textarea textarea-blocked" id="stampFoot">
+                            <span class="innerTextarea"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div id="cleanSpacesDiv">
+                        <span>Excluir linhas em branco da análise</span>
+                        <input type="checkbox" name="cleanSpaces" id="cleanSpaces" value="precisa" checked>
+                    </div>
+                    <button style="border-radius: 6px;" id="btnStampGen">Gerar e copiar carimbo</button>
+                </div>
+
+            </div>
+
+        </main>
+
+        <div id="theFinalStampHead">
+            <p class="textarea innerTextarea textarea-allborder textarea-blocked" id="theFinalStamp"></p>
+        </div>
+
+        <div id="fastAnalysisAddAlertHead">
+            <p id="fastAnalysisAddAlert"></p>
+        </div>
+
+        <div id="retencaoStampHead">
+            <div id="retencaoStampBody">
+                <label for="numRetencao">Número TA Raiz:</label>
+                <input type="text" id="numRetencao" placeholder="0000000000"> <!-- value="0000000000"> -->
+                <br>
+                <span>Incluir análise: </span>
+                <input type="checkbox" name="retIncluiAnalise" id="retPrecisaAnalise" value="precisa" unchecked> <!-- Marca a caixa de diálogo da retenção. -->
+                <br>
+                <span>Observação:</span>
+                <div class="textarea innerTextarea textarea-allborder" id="obsRetencao" contenteditable="true">Sendo tratada pela TA RAIZ.</div>
+                <div id="popRetStamp">
+                    <hr>
+                    <div class="textarea innerTextarea textarea-allborder textarea-blocked" id="retencaoStamp"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="monitoracaoStampHead">
+            <div id="monitoracaoStampBody">
+                <label for="tempoMonitoracao">Tempo em Monitoração:</label>
+                <input type="number" id="tempoMonitoracao" placeholder="Horas" min="1">
+                <label for="limiteMonitoracao">Limite:</label>
+                <span>   
+                    <input type="text" id="limiteMonitoracao" placeholder="Data Limite" value="" disabled>
+                </span>
+                <br>
+                <label for="motivoMonitoracao">Motivo da Monitoração:</label>
+                <input type="text" id="motivoMonitoracao" placeholder="Selecione">
+                <br>
+                <div id="monitoracaoTp">
+                    <label for="numTpRaiz">Número TP:</label>
+                    <input type="text" id="numTpRaiz" placeholder="0000000000">
+                    <br>
+                </div>
+                <span>Incluir análise: </span>
+                <input type="checkbox" name="motIncluiAnalise" id="motPrecisaAnalise" value="precisa" checked>
+                <br>
+                <span>Observação:</span>
+                <div class="textarea innerTextarea textarea-allborder" id="obsMonitoracao" contenteditable="true"></div>
+                
+                <div id="popMotStamp">
+                    <hr>
+                    <div class="textarea innerTextarea textarea-allborder textarea-blocked" id="monitoracaoStamp"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="suporteTXStampHead">
+            <p class="textarea innerTextarea textarea-allborder" id="suporteTXStamp"></p>
+            
+        </div>
+
+        <div id="analiseTXStampHead">
+            <div id="analiseTXStampBody">
+                <label for="numAnaliseTX">Número TA para Análise:</label>
+                <input type="text" id="numAnaliseTX" placeholder="000000000">
+                <br>
+                <div id="popAnlsTXStamp">
+                    <hr>
+                    <div class="textarea innerTextarea textarea-allborder textarea-blocked" id="analiseTXStamp"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="pendenciaStampHead">
+            <div id="pendenciaStampBody">
+                <span>Observação:</span>
+                <div class="textarea innerTextarea textarea-allborder" id="obsPendencia" contenteditable="true">Justifique o motivo neste campo.</div>
+                <div id="popPendStamp">
+                    <hr>
+                    <div class="textarea innerTextarea textarea-allborder textarea-blocked" id="pendenciaStamp"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="clearStampHead">
+            <p class="textarea innerTextarea textarea-allborder" id="clearStamp"></p>
+        </div>
+
+        <div id="scripts">
+            <script src="utils/jquery-3.5.1.min.js"></script>
+            <script src="utils/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+
+            <script src="js/frags/colaboradorInput.js"></script>
+            <script src="js/frags/analiseAgil.js"></script>
+            <script src="js/carimbos.js"></script>
+            <script src="js/stamp.js"></script>
+            <script src="js/frags/carimbosExtras/retencao.js"></script>
+            <script src="js/frags/carimbosExtras/monitoracao.js"></script>
+            <script src="js/frags/carimbosExtras/suporteTX.js"></script>
+            <script src="js/frags/carimbosExtras/suporteTX2.js"></script>
+            <script src="js/frags/carimbosExtras/analiseTX.js"></script>
+            <script src="js/frags/carimbosExtras/pendencia.js"></script>
+            <script src="js/frags/carimbosExtras/clear.js"></script>
+            <script src="js/frags/textareaControls.js"></script>
+            <script src="js/frags/carimbosExtras/retencaop2.js"></script>
+            <script src="js/frags/carimbosExtras/pendenciap2.js"></script>
+            <script src="js/frags/carimbosExtras/pendenciap3.js"></script>
+        </div>
+    </body>
+
+    <div>
+        
+        <h5 title="Desenvolvido por @EPSjunior | StampFast!">StampFast! | V2.1</h5>
+        
+    </div>
+    
+    
+    <div>
+        <hr color="gray" size="38" width="100%">  <!-- Linha inferior da página -->
+    </div>
+     
+   
+</html>
